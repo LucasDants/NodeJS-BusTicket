@@ -3,10 +3,10 @@
 ```bash
 
 # Clone this repository
-$ git clone https://github.com/LucasDants/NodeJS-ProductsAPI.git
+$ git clone https://github.com/LucasDants/NodeJS-BusTicket.git
 
 # Access the project folder cmd/terminal
-$ cd NodeJS-ProductsAPI
+$ cd NodeJS-BusTicket
 
 # install the dependencies
 $ npm install
@@ -20,77 +20,6 @@ $ npm run dev
 
 # Go to http://localhost:3333/api-docs to have a swagger documentation of the application 
 
-```
-
-# Backend routes
-
-**/register** - This route should register a new customer. <br />
-
-```
-curl --location '{apiURL}/register' \
---header 'Content-Type: application/json' \
---data-raw '{
-   "name": "string",
-   "email": "string",
-   "password": "string"
-}'
-```
-
-**/login** - This route should authenticate a customer. <br />
-
-```
-curl --location '{apiURL}/login' \
---header 'Content-Type: application/json' \
---data-raw '{
-	"email": "string",
-	"password": "string"
-}'
-```
-
-**/products** - This route should add a new product while maintaining the supplier's reference. (Requires authentication). <br />
-
-```
-curl --location '{apiURL}/products' \
---header 'Authorization: Bearer {token}' \
---form 'title="Hamburguer"' \
---form 'description="Better hamburguer in the city"' \
---form 'price="30"' \
---form 'image=@"/path/to/file"'
-```
-
-**/products/{id}** - This route should edit the product with the specified ID while maintaining the supplier's reference. (Requires authentication). <br />
-
-```
-curl --location --globoff --request PUT '{apiURL}/products/{id}' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {token} \
---data '{
-	"title": "string",
-	"description": "string",
-    "price": 0,
-    "imageURL": "string"
-}'
-```
-
-**/products** - This route should return a list of all products sorted from newest to oldest, with the option to reverse this order and to only return products from the authenticated supplier (Requires authentication). <br />
-
-```
-curl --location '{apiURL}/products' \
---header 'Authorization: Bearer {token}'
-```
-
-**/products/{id}** - This route should return the product with the specified ID along with all its details (Requires authentication). <br />
-
-```
-curl --location --globoff '{apiURL}/products/{id}' \
---header 'Authorization: Bearer {token}'
-```
-
-**/products/{id}** - This route should delete the product with the specified ID. <br />
-
-```
-curl --location --globoff --request DELETE '{apiURL}/products/{id}' \
---header 'Authorization: Bearer {token}'
 ```
 
 # Explanation
@@ -108,20 +37,5 @@ curl --location --globoff --request DELETE '{apiURL}/products/{id}' \
 **Singleton:** The Singleton Pattern is a design pattern that ensures a class has only one single instance throughout the application. It is useful in scenarios where you want to control access to a shared resource, such as a database connection, a connection pool, or global configuration. Ensuring only one instance exists helps prevent conflicts and concurrency issues.
 
 These concepts are commonly used together to create an organized and scalable application architecture. They help separate concerns, make code more modular, and facilitate software maintenance and testing.
-
-# Postman Collection 
-
-1. Open Postman.
-2. Navigate to the Collections tab on the left-hand side.
-3. Click on the "Import" button located in the top-left corner of the screen.
-4. Drag this file into the box
-
-[Link to the postman collection](https://github.com/LucasDants/NodeJS-ProductsAPI/blob/main/docs/Products.postman_collection.json)
-
-# Testing
-
-```
-npm run test
-```
 
  <p>Made with :heart: by Lucas Dantas.
