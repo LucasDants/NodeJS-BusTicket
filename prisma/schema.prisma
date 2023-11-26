@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Bus {
+  id   String  @id @default(uuid())
+  name String?
+
+  seats Seat[]
+}
+
+model Seat {
+  id     String  @id @default(uuid())
+  number Int @unique 
+
+  bus    Bus     @relation(fields: [busId], references: [id])
+  busId  String
+
+  tickets Ticket[]
+}
+
+model Ticket {
+  id         String   @id @default(uuid())
+  price      Int
+  user       String
+  travelDate DateTime
+
+  seat       Seat     @relation(fields: [seatId], references: [id])
+  seatId     String
+
+  routes RoutesOnTickets[]
+}
+
+model City {
+  id   String @id @default(uuid())
+  name String @unique
+
+  toRoutes RoutesOnTickets[] @relation("FromCity")
+  fromRoutes RoutesOnTickets[] @relation("ToCity")
+}
+
+
+model RoutesOnTickets {
+  fromCity   City   @relation("FromCity", fields: [fromCityId], references: [id])
+  fromCityId String
+
+  toCity   City   @relation("ToCity", fields: [toCityId], references: [id])
+  toCityId String
+
+  ticket   Ticket @relation(fields: [ticketId], references: [id])
+  ticketId String
+
+  @@id([fromCityId, toCityId, ticketId])
+}
